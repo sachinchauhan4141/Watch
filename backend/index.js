@@ -18,6 +18,6 @@ app.use("/api/auth/", require("./routes/auth"));
 app.use("/api/genre", require("./routes/genre"));
 app.use("/api/video", require("./routes/video"));
 
-app.listen(port || 8000, () => {
+app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
 });

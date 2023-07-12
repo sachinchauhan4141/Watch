@@ -3,7 +3,7 @@ import videoContext from "./videoContext";
 
 const VideoState = (props) => {
   // const host = "http://localhost:5000";
-  const host = "https://watch-now-tv-da2q.onrender.com";
+  const host = "https://watch-now-tv-da2q.onrender.com:5000";
   const token = localStorage.getItem('token');
 
   const [video, setVideo] = useState(null);
