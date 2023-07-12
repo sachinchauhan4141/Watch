@@ -1,10 +1,35 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link ,useNavigate} from "react-router-dom";
+import videoContext from "../context/videos/videoContext";
 import alertContext from "../context/alert/alertContext";
 
 export default function Navbar(props) {
   const context = useContext(alertContext);
   const { showAlert} = context;
+  const context1 = useContext(videoContext);
+  const { video } = context1;
+  const navigate = useNavigate();
+
+  const [search,setSearch] = useState("");
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(search);
+    video.map((e)=>{
+      if(e.title===search){
+        localStorage.setItem("curr-genre",e.genre);
+        localStorage.setItem("curr-video",e._id);        
+        navigate("/video");
+        return "found";
+      }
+      showAlert("danger", "Video not found...");
+      return "not found";
+    });
+  }
 
   return (
     <header style={{ marginBottom: "4rem" }}>
@@ -141,12 +166,14 @@ export default function Navbar(props) {
                 </ul>
               </li>
             </ul>
-            <form className="d-flex" role="search">
+            <form className="d-flex" role="search" onSubmit={handleSubmit}>
               {localStorage.getItem("token") ? (
                 <>
                   <input
                     className="form-control me-2"
                     type="search"
+                    value = {search}
+                    onChange={handleChange}
                     placeholder="Search"
                     aria-label="Search"
                   />
