@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
 import Alert from "./components/Alert";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -80,7 +79,6 @@ function App() {
                   </div>
                 </>
               )}
-              <Footer />
             </>
           }
         />
@@ -149,7 +147,6 @@ function App() {
           }
         />
       </Routes>
-      <Footer />
     </BrowserRouter>
   );
 }
