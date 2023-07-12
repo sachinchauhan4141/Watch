@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoURI = "mongodb://127.0.0.1:27017/watchnowtv";
+const mongoURI = "mongodb+srv://Sachin_chauhan:MognoAtlas4141@cluster0.xcejt8u.mongodb.net/watchnowtv";
 
 const connectToMongo = async () => {
     try {
