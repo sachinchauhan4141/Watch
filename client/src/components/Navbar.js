@@ -23,9 +23,8 @@ export default function Navbar(props) {
   const handleSubmit = (e) => {
     props.forceUpdate();
     e.preventDefault();
-    console.log(search);
     video.map((e)=>{
-      if(e.title===search){
+      if(e.title.startsWith(search)){
         setCurrVideoId(e._id);
         localStorage.setItem("curr-genre",e.genre);
         localStorage.setItem("curr-video",e._id);        
