@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext ,useReducer} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
 import Alert from "./components/Alert";
@@ -18,7 +18,7 @@ function App() {
   const context2 = useContext(UserContext);
   const { user, getUser } = context2;
   const [progress, setProgress] = useState(0);
-
+  const [update, forceUpdate] = useReducer(x => x + 1, 0);
   const setLoading = (progress) => {
     setProgress(progress);
   };
@@ -27,11 +27,11 @@ function App() {
     if (localStorage.getItem("token")) {
       getUser();
     }
-  });
+  },[update]);
 
   return (
     <BrowserRouter>
-      <Navbar user={user} />
+      <Navbar user={user} forceUpdate={forceUpdate}/>
       <LoadingBar
         color="#f11946"
         progress={progress}
@@ -65,7 +65,7 @@ function App() {
           element={
             <>
               {localStorage.getItem("token") ? (
-                <Video />
+                <Video update={update} forceUpdate={forceUpdate}/>
               ) : (
                 <>
                   <div

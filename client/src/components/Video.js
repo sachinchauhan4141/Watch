@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import videoContext from "../context/videos/videoContext";
 import currVideoContext from "../context/currVideo/currVideoContext";
 
-function Video() {
+function Video(props) {
   const context1 = useContext(videoContext);
   const { video, getAllVideos, getVideo } = context1;
   const context2 = useContext(currVideoContext);
@@ -17,7 +17,7 @@ function Video() {
     );
     setTimeout(() => {
       window.scrollTo(0, 0);
-    }, 1000);
+    }, 500);
     setCurrVideo(currVideo);
   };
 
@@ -25,7 +25,7 @@ function Video() {
     getAllVideos();
     getCurrVideo();
     // eslint-disable-next-line
-  }, []);
+  }, [props.update]);
 
   return (
     <main>
@@ -70,6 +70,7 @@ function Video() {
                     <div className="col my-3" key={element.id}>
                       <Link
                         onClick={() => {
+                          props.forceUpdate();
                           setCurrVideoId(element._id);
                           getCurrVideo(currVideoId);
                           localStorage.setItem("curr-video", element._id);

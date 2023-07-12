@@ -11,6 +11,7 @@ export default function Navbar(props) {
   const { video } = context1;
   const context4 = useContext(currVideoContext);
   const { setCurrVideoId } = context4;
+  
   const navigate = useNavigate();
 
   const [search,setSearch] = useState("");
@@ -20,6 +21,7 @@ export default function Navbar(props) {
   }
 
   const handleSubmit = (e) => {
+    props.forceUpdate();
     e.preventDefault();
     console.log(search);
     video.map((e)=>{
