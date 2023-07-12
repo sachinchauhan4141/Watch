@@ -2,12 +2,15 @@ import React, { useContext, useState } from "react";
 import { Link ,useNavigate} from "react-router-dom";
 import videoContext from "../context/videos/videoContext";
 import alertContext from "../context/alert/alertContext";
+import currVideoContext from "../context/currVideo/currVideoContext";
 
 export default function Navbar(props) {
   const context = useContext(alertContext);
   const { showAlert} = context;
   const context1 = useContext(videoContext);
   const { video } = context1;
+  const context4 = useContext(currVideoContext);
+  const { setCurrVideoId } = context4;
   const navigate = useNavigate();
 
   const [search,setSearch] = useState("");
@@ -21,6 +24,7 @@ export default function Navbar(props) {
     console.log(search);
     video.map((e)=>{
       if(e.title===search){
+        setCurrVideoId(e._id);
         localStorage.setItem("curr-genre",e.genre);
         localStorage.setItem("curr-video",e._id);        
         navigate("/video");
