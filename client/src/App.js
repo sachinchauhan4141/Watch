@@ -11,6 +11,7 @@ import GenreAdmin from "./components/Admin/GenreAdmin";
 import VideoAdmin from "./components/Admin/VideoAdmin";
 import UserContext from "./context/user/userContext";
 import alertContext from "./context/alert/alertContext";
+import User from "./components/User";
 
 function App() {
   const context1 = useContext(alertContext);
@@ -27,6 +28,7 @@ function App() {
     if (localStorage.getItem("token")) {
       getUser();
     }
+    // eslint-disable-next-line
   },[update]);
 
   return (
@@ -143,6 +145,15 @@ function App() {
                   </div>
                 </>
               )}
+            </>
+          }
+        />
+        <Route
+          path="/user"
+          element={
+            <>
+              <Alert alert={alert} />
+              <User />
             </>
           }
         />

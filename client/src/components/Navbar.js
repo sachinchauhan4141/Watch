@@ -1,40 +1,41 @@
 import React, { useContext, useState } from "react";
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import videoContext from "../context/videos/videoContext";
 import alertContext from "../context/alert/alertContext";
 import currVideoContext from "../context/currVideo/currVideoContext";
 
 export default function Navbar(props) {
   const context = useContext(alertContext);
-  const { showAlert} = context;
+  const { showAlert } = context;
   const context1 = useContext(videoContext);
   const { video } = context1;
   const context4 = useContext(currVideoContext);
   const { setCurrVideoId } = context4;
-  
+
   const navigate = useNavigate();
 
-  const [search,setSearch] = useState("");
+  const [search, setSearch] = useState("");
 
   const handleChange = (e) => {
     setSearch(e.target.value);
-  }
+  };
 
   const handleSubmit = (e) => {
     props.forceUpdate();
     e.preventDefault();
-    video.map((e)=>{
-      if(e.title.startsWith(search)){
+    console.log(search);
+    video.map((e) => {
+      if (e.title.startsWith(search)) {
         setCurrVideoId(e._id);
-        localStorage.setItem("curr-genre",e.genre);
-        localStorage.setItem("curr-video",e._id);        
+        localStorage.setItem("curr-genre", e.genre);
+        localStorage.setItem("curr-video", e._id);
         navigate("/video");
         return "found";
       }
       showAlert("danger", "Video not found...");
       return "not found";
     });
-  }
+  };
 
   return (
     <header style={{ marginBottom: "4rem" }}>
@@ -171,30 +172,60 @@ export default function Navbar(props) {
                 </ul>
               </li>
             </ul>
+            {localStorage.getItem("token") && (
+              <ul className="navbar-nav">
+                <li className="nav-item dropdown">
+                  <Link
+                    className="nav-link dropdown-toggle"
+                    to="/"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {props.user.name}
+                  </Link>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <Link
+                        className="dropdown-item"
+                        to="/user"
+                        onClick={() => {
+                          console.log("click");
+                        }}
+                      >
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="dropdown-item"
+                        to="/login"
+                        onClick={() => {
+                          showAlert("warning", "Logging out...");
+                          localStorage.removeItem("token");
+                        }}
+                      >
+                        Logout
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            )}
             <form className="d-flex" role="search" onSubmit={handleSubmit}>
               {localStorage.getItem("token") ? (
                 <>
                   <input
-                    className="form-control me-2"
+                    className="form-control mx-2"
                     type="search"
-                    value = {search}
+                    value={search}
                     onChange={handleChange}
                     placeholder="Search"
                     aria-label="Search"
                   />
-                  <button className="btn btn-outline-danger mx-2" type="submit">
+                  <button className="btn btn-outline-danger" type="submit">
                     Search
                   </button>
-                  <Link
-                    className="btn btn-outline-danger"
-                    to="/login"
-                    onClick={() => {
-                      showAlert("warning", "Logging out...");
-                      localStorage.removeItem("token");
-                    }}
-                  >
-                    Logout
-                  </Link>
                 </>
               ) : (
                 <>
