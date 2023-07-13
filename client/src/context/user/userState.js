@@ -45,9 +45,22 @@ const UserState = (props) => {
     return response;
   };
 
+  //update a user requires login
+  const updateUser = async (name, email) => {
+    const response = await fetch(`${host}/api/auth/updateuser`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        "auth-token": token,
+      },
+      body: JSON.stringify({ name, email }),
+    });
+    return response;
+  };
+
   return (
     <userContext.Provider
-      value={{ user, createUser, authUser, getUser}}
+      value={{ user, createUser, authUser, getUser, updateUser }}
     >
       {props.children}
     </userContext.Provider>

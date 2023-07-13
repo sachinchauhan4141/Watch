@@ -96,7 +96,7 @@ router.post(
   }
 );
 
-//ROUTE 2 : getuser using: POST "/api/auth/getuser". require login
+//ROUTE 3 : getuser using: POST "/api/auth/getuser". require login
 router.post("/getuser", fetchuser, async (req, res) => {
   try {
     const userId = req.user.id;
@@ -107,4 +107,32 @@ router.post("/getuser", fetchuser, async (req, res) => {
     res.status(500).send("internal server error!");
   }
 });
+
+//ROUTE 4 : updateuser using: PUT "/api/auth/updateuser". require login
+router.put("/updateuser", fetchuser, async (req, res) => {
+  try {
+    const { name, email } = req.body;
+
+    //creating new note
+    const newCreds = {};
+    if (name) {
+      newCreds.name = name;
+    }
+    if (email) {
+      newCreds.email = email;
+    }
+
+    const userId = req.user.id;
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $set: newCreds },
+      { new: true }
+    );
+    res.json({ success: true, user });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("internal server error!");
+  }
+});
+
 module.exports = router;
