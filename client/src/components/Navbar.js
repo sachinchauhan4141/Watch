@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import videoContext from "../context/videos/videoContext";
 import alertContext from "../context/alert/alertContext";
@@ -11,6 +11,7 @@ export default function Navbar(props) {
   const { video } = context1;
   const context4 = useContext(currVideoContext);
   const { setCurrVideoId } = context4;
+  const ref1 = useRef(null);
 
   const navigate = useNavigate();
 
@@ -41,7 +42,14 @@ export default function Navbar(props) {
     <header style={{ marginBottom: "4rem" }}>
       <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/" style={{ color: "red" }}>
+          <Link
+            onclick={() => {
+              ref1.current.click();
+            }}
+            className="navbar-brand"
+            to="/"
+            style={{ color: "red" }}
+          >
             WatchNowTV
           </Link>
           <button
@@ -52,18 +60,29 @@ export default function Navbar(props) {
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation"
+            ref={ref1}
           >
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/">
+                <Link
+                  onclick={() => {
+                    ref1.current.click();
+                  }}
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/"
+                >
                   Home
                 </Link>
               </li>
               <li className="nav-item dropdown">
                 <Link
+                  onclick={() => {
+                    ref1.current.click();
+                  }}
                   className="nav-link dropdown-toggle"
                   to="/"
                   role="button"
@@ -74,61 +93,127 @@ export default function Navbar(props) {
                 </Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link className="dropdown-item" to="/Category">
+                    <Link
+                      onclick={() => {
+                        ref1.current.click();
+                      }}
+                      className="dropdown-item"
+                      to="/Category"
+                    >
                       Netflix
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/Category">
+                    <Link
+                      onclick={() => {
+                        ref1.current.click();
+                      }}
+                      className="dropdown-item"
+                      to="/Category"
+                    >
                       Hotstar
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/Category">
+                    <Link
+                      onclick={() => {
+                        ref1.current.click();
+                      }}
+                      className="dropdown-item"
+                      to="/Category"
+                    >
                       Disney+
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/Category">
+                    <Link
+                      onclick={() => {
+                        ref1.current.click();
+                      }}
+                      className="dropdown-item"
+                      to="/Category"
+                    >
                       Prime Video
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/Category">
+                    <Link
+                      onclick={() => {
+                        ref1.current.click();
+                      }}
+                      className="dropdown-item"
+                      to="/Category"
+                    >
                       Xstreme
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/Category">
+                    <Link
+                      onclick={() => {
+                        ref1.current.click();
+                      }}
+                      className="dropdown-item"
+                      to="/Category"
+                    >
                       Jio Cinema
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/Category">
+                    <Link
+                      onclick={() => {
+                        ref1.current.click();
+                      }}
+                      className="dropdown-item"
+                      to="/Category"
+                    >
                       Sony Liv
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/Category">
+                    <Link
+                      onclick={() => {
+                        ref1.current.click();
+                      }}
+                      className="dropdown-item"
+                      to="/Category"
+                    >
                       Other
                     </Link>
                   </li>
                 </ul>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/about">
+                <Link
+                  onclick={() => {
+                    ref1.current.click();
+                  }}
+                  className="nav-link"
+                  to="/about"
+                >
                   About...
                 </Link>
               </li>
               {localStorage.getItem("token") && props.user.isAdmin && (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link ml-2" to="/addvideo">
+                    <Link
+                      onclick={() => {
+                        ref1.current.click();
+                      }}
+                      className="nav-link ml-2"
+                      to="/addvideo"
+                    >
                       Add Video
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/addgenre">
+                    <Link
+                      onclick={() => {
+                        ref1.current.click();
+                      }}
+                      className="nav-link"
+                      to="/addgenre"
+                    >
                       Add Genre
                     </Link>
                   </li>
@@ -136,6 +221,9 @@ export default function Navbar(props) {
               )}
               <li className="nav-item dropdown">
                 <Link
+                  onclick={() => {
+                    ref1.current.click();
+                  }}
                   className="nav-link dropdown-toggle"
                   to="/"
                   role="button"
@@ -176,6 +264,9 @@ export default function Navbar(props) {
               <ul className="navbar-nav">
                 <li className="nav-item dropdown">
                   <Link
+                    onclick={() => {
+                      ref1.current.click();
+                    }}
                     className="nav-link dropdown-toggle"
                     to="/"
                     role="button"
@@ -190,7 +281,7 @@ export default function Navbar(props) {
                         className="dropdown-item"
                         to="/user"
                         onClick={() => {
-                          console.log("click");
+                          ref1.current.click();
                         }}
                       >
                         Profile
@@ -203,6 +294,7 @@ export default function Navbar(props) {
                         onClick={() => {
                           showAlert("warning", "Logging out...");
                           localStorage.removeItem("token");
+                          ref1.current.click();
                         }}
                       >
                         Logout
@@ -229,10 +321,22 @@ export default function Navbar(props) {
                 </>
               ) : (
                 <>
-                  <Link className="btn btn-outline-danger" to="/login">
+                  <Link
+                    onclick={() => {
+                      ref1.current.click();
+                    }}
+                    className="btn btn-outline-danger"
+                    to="/login"
+                  >
                     Login
                   </Link>
-                  <Link className="btn btn-outline-danger mx-2" to="/register">
+                  <Link
+                    onclick={() => {
+                      ref1.current.click();
+                    }}
+                    className="btn btn-outline-danger mx-2"
+                    to="/register"
+                  >
                     Signup
                   </Link>
                 </>
