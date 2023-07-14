@@ -1,4 +1,4 @@
-import React, { useContext, useState,useRef } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import videoContext from "../context/videos/videoContext";
 import alertContext from "../context/alert/alertContext";
@@ -194,30 +194,44 @@ export default function Navbar(props) {
                 </Link>
               </li>
               {localStorage.getItem("token") && props.user.isAdmin && (
-                <>
-                  <li className="nav-item">
-                    <Link
-                      onclick={() => {
-                        ref1.current.click();
-                      }}
-                      className="nav-link ml-2"
-                      to="/addvideo"
-                    >
-                      Add Video
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      onclick={() => {
-                        ref1.current.click();
-                      }}
-                      className="nav-link"
-                      to="/addgenre"
-                    >
-                      Add Genre
-                    </Link>
-                  </li>
-                </>
+                <li className="nav-item dropdown">
+                  <Link
+                    onclick={() => {
+                      ref1.current.click();
+                    }}
+                    className="nav-link dropdown-toggle"
+                    to="/"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Admin
+                  </Link>
+                  <ul className="dropdown-menu">
+                    <li className="dropdown-item">
+                      <Link
+                        onclick={() => {
+                          ref1.current.click();
+                        }}
+                        className="nav-link ml-2"
+                        to="/addvideo"
+                      >
+                        Add Video
+                      </Link>
+                    </li>
+                    <li className="dropdown-item">
+                      <Link
+                        onclick={() => {
+                          ref1.current.click();
+                        }}
+                        className="nav-link"
+                        to="/addgenre"
+                      >
+                        Add Genre
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
               )}
               <li className="nav-item dropdown">
                 <Link
