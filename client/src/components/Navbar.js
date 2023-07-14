@@ -182,17 +182,6 @@ export default function Navbar(props) {
                   </li>
                 </ul>
               </li>
-              <li className="nav-item">
-                <Link
-                  onclick={() => {
-                    ref1.current.click();
-                  }}
-                  className="nav-link"
-                  to="/about"
-                >
-                  About...
-                </Link>
-              </li>
               {localStorage.getItem("token") && props.user.isAdmin && (
                 <li className="nav-item dropdown">
                   <Link
