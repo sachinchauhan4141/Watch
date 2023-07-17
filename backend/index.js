@@ -11,7 +11,7 @@ const corsOptions = {
 connectToMongo();
 
 const app = express();
-const port = process.env.PORT;
+const port = 5000;
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -21,5 +21,5 @@ app.use("/api/genre", require("./routes/genre"));
 app.use("/api/video", require("./routes/video"));
 
 app.listen(port, () => {
-  console.log(`Example app listening on port http://localhost:${port}`);
+  console.log(`Example app listening on ${process.env.ORIGIN} and port${port}`);
 });
