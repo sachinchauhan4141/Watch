@@ -2,7 +2,7 @@ import { useState } from "react";
 import videoContext from "./videoContext";
 
 const VideoState = (props) => {
-  const host = "https://watch-now-tv-da2q.onrender.com";
+  // const host = "https://watch-now-tv-da2q.onrender.com";
   const token = localStorage.getItem('token');
 
   const [video, setVideo] = useState(null);
@@ -10,7 +10,7 @@ const VideoState = (props) => {
   //get all videos
   const getAllVideos = async () => {
     const response = await fetch(
-      `${host}/api/video/fetchallvideos`,
+      `/api/video/fetchallvideos`,
       {
         method: "GET",
         headers: {
@@ -25,7 +25,7 @@ const VideoState = (props) => {
 
   //get current video
   const getVideo = async (_id) => {
-    const response = await fetch(`${host}/api/video/getvideo/${_id}`, {
+    const response = await fetch(`/api/video/getvideo/${_id}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -38,7 +38,7 @@ const VideoState = (props) => {
 
   //add new video
   const addVideo = async (id,genre,title,src,url) => {
-    const response = await fetch(`${host}/api/video/addvideo`, {
+    const response = await fetch(`/api/video/addvideo`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -51,7 +51,7 @@ const VideoState = (props) => {
 
   //update a video
   const updateVideo = async (_id,id,genre,title,src,url) => {
-    const response = await fetch(`${host}/api/video/updatevideo/${_id}`, {
+    const response = await fetch(`/api/video/updatevideo/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -65,7 +65,7 @@ const VideoState = (props) => {
 
   //delete a video
   const deleteVideo = async (id) => {
-    const response = await fetch(`${host}/api/video/deletevideo/${id}`, {
+    const response = await fetch(`/api/video/deletevideo/${id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

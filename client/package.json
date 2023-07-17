@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
+  "proxy":"https://watch-now-tv-da2q.onrender.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
