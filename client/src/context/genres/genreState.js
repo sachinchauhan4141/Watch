@@ -2,7 +2,7 @@ import React , { useState } from "react";
 import genreContext from "./genreContext";
 
 const GenreState = (props) => {
-  // const host = "https://watch-now-tv-da2q.onrender.com";
+  const host = "https://watch-now-tv-da2q.onrender.com";
   const token = localStorage.getItem('token');
 
   const [genres, setGenre] = useState([]);
@@ -10,7 +10,7 @@ const GenreState = (props) => {
   //get all genres
   const getAllGenres = async () => {
     const response = await fetch(
-      `/api/genre/fetchallgenres`,
+      `${host}/api/genre/fetchallgenres`,
       {
         method: "GET",
         headers: {
@@ -26,7 +26,7 @@ const GenreState = (props) => {
 
   //add new genre
   const addGenre = async (id,title) => {
-    const response = await fetch(`/api/genre/addgenre`, {
+    const response = await fetch(`${host}/api/genre/addgenre`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -39,7 +39,7 @@ const GenreState = (props) => {
 
   //update a genre
   const updateGenre = async (id, title) => {
-    const response = await fetch(`/api/genre/updategenre/${id}`, {
+    const response = await fetch(`${host}/api/genre/updategenre/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -52,7 +52,7 @@ const GenreState = (props) => {
 
   //delete a genre
   const deleteGenre = async (id) => {
-    const response = await fetch(`/api/video/deletevideo/${id}`, {
+    const response = await fetch(`${host}/api/video/deletevideo/${id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

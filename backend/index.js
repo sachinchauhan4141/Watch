@@ -21,5 +21,5 @@ app.use("/api/genre", require("./routes/genre"));
 app.use("/api/video", require("./routes/video"));
 
 app.listen(port, () => {
-  console.log(`Example app listening on ${process.env.ORIGIN} and port${port}`);
+  console.log(`Example app listening on ${process.env.ORIGIN}`);
 });
