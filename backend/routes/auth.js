@@ -6,7 +6,7 @@ const fetchuser = require("../middleware/fetchuser");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
 
-const JWT_SECRET = "4141 Hu Me 4141 1s Duniya ka 4141";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 //ROUTE 1 : create a user using: POST "/api/auth/createuser". doesnt require login
 router.post(

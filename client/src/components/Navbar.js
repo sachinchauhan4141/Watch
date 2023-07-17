@@ -46,7 +46,6 @@ export default function Navbar(props) {
             WatchNowTV
           </Link>
           <button
-            id="toggle"
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
@@ -55,7 +54,7 @@ export default function Navbar(props) {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon" ref={ref1}/>
+            <span className="navbar-toggler-icon" ref={ref1}></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -230,8 +229,8 @@ export default function Navbar(props) {
                         className="dropdown-item"
                         to="/login"
                         onClick={() => {
-                          showAlert("warning", "Logging out...");
                           ref1.current.click();
+                          showAlert("warning", "Logging out...");
                           localStorage.removeItem("token");
                         }}
                       >

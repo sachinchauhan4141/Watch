@@ -2,6 +2,8 @@ import { useState } from "react";
 import userContext from "./userContext";
 
 const UserState = (props) => {
+  // const host = "http://localhost:5000";
+  // const host = "https://watch-now-tv-da2q.onrender.com";
   const token = localStorage.getItem("token");
 
   const [user, setUser] = useState([]);

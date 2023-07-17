@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const corsOptions = {
-  origin: process.env.FRONTEND_URI // frontend URI (ReactJS)
+  origin: process.env.ORIGIN // frontend URI (ReactJS)
 }
 
 connectToMongo();
