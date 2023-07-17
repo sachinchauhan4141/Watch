@@ -1,6 +1,7 @@
 {
   "name": "watch-now-tv",
   "version": "1.0.0",
+  "proxy": "http://localhost:5000",
   "description": "",
   "main": "main.js",
   "scripts": {

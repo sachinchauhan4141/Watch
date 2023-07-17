@@ -1,15 +1,17 @@
 const connectToMongo = require("./db");
 const express = require("express");
 const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const corsOptions = {
-  origin: "https://watch-now-front.onrender.com" // frontend URI (ReactJS)
+  origin: process.env.FRONTEND_URI // frontend URI (ReactJS)
 }
 
 connectToMongo();
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT;
 
 app.use(cors(corsOptions));
 app.use(express.json());

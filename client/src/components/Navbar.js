@@ -40,17 +40,13 @@ export default function Navbar(props) {
 
   return (
     <header style={{ marginBottom: "4rem" }}>
-      <nav
-        className="navbar navbar-expand-lg bg-body-tertiary fixed-top"
-        onclick={() => {
-          ref1.current.click();
-        }}
-      >
+      <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/" style={{ color: "red" }}>
             WatchNowTV
           </Link>
           <button
+            id="toggle"
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
@@ -58,14 +54,20 @@ export default function Navbar(props) {
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation"
-            ref={ref1}
           >
-            <span className="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon" ref={ref1}/>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/"
+                  onClick={() => {
+                    ref1.current.click();
+                  }}
+                >
                   Home
                 </Link>
               </li>
@@ -135,12 +137,24 @@ export default function Navbar(props) {
                   </Link>
                   <ul className="dropdown-menu">
                     <li className="dropdown-item">
-                      <Link className="nav-link ml-2" to="/addvideo">
+                      <Link
+                        className="nav-link ml-2"
+                        to="/addvideo"
+                        onClick={() => {
+                          ref1.current.click();
+                        }}
+                      >
                         Add Video
                       </Link>
                     </li>
                     <li className="dropdown-item">
-                      <Link className="nav-link" to="/addgenre">
+                      <Link
+                        className="nav-link"
+                        to="/addgenre"
+                        onClick={() => {
+                          ref1.current.click();
+                        }}
+                      >
                         Add Genre
                       </Link>
                     </li>
@@ -162,6 +176,7 @@ export default function Navbar(props) {
                     <button
                       className="dropdown-item"
                       onClick={() => {
+                        ref1.current.click();
                         const bdy = document.getElementById("body");
                         localStorage.setItem("theme", "dark");
                         bdy.setAttribute("data-bs-theme", "dark");
@@ -174,6 +189,7 @@ export default function Navbar(props) {
                     <button
                       className="dropdown-item"
                       onClick={() => {
+                        ref1.current.click();
                         const bdy = document.getElementById("body");
                         localStorage.setItem("theme", "light");
                         bdy.setAttribute("data-bs-theme", "light");
@@ -199,7 +215,13 @@ export default function Navbar(props) {
                   </Link>
                   <ul className="dropdown-menu">
                     <li>
-                      <Link className="dropdown-item" to="/user">
+                      <Link
+                        className="dropdown-item"
+                        to="/user"
+                        onClick={() => {
+                          ref1.current.click();
+                        }}
+                      >
                         Profile
                       </Link>
                     </li>
@@ -209,6 +231,7 @@ export default function Navbar(props) {
                         to="/login"
                         onClick={() => {
                           showAlert("warning", "Logging out...");
+                          ref1.current.click();
                           localStorage.removeItem("token");
                         }}
                       >
@@ -230,16 +253,34 @@ export default function Navbar(props) {
                     placeholder="Search"
                     aria-label="Search"
                   />
-                  <button className="btn btn-outline-danger" type="submit">
+                  <button
+                    className="btn btn-outline-danger"
+                    type="submit"
+                    onClick={() => {
+                      ref1.current.click();
+                    }}
+                  >
                     Search
                   </button>
                 </>
               ) : (
                 <>
-                  <Link className="btn btn-outline-danger" to="/login">
+                  <Link
+                    className="btn btn-outline-danger"
+                    to="/login"
+                    onClick={() => {
+                      ref1.current.click();
+                    }}
+                  >
                     Login
                   </Link>
-                  <Link className="btn btn-outline-danger mx-2" to="/register">
+                  <Link
+                    className="btn btn-outline-danger mx-2"
+                    to="/register"
+                    onClick={() => {
+                      ref1.current.click();
+                    }}
+                  >
                     Signup
                   </Link>
                 </>
