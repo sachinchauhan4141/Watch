@@ -2,11 +2,11 @@ import { useState } from "react";
 import videoContext from "./videoContext";
 
 const VideoState = (props) => {
-  // const host = "http://localhost:5000";
-  const host = "https://watch-now-tv-da2q.onrender.com";
+  const host = "http://localhost:5000";
+  // const host = "https://watch-now-tv-da2q.onrender.com";
   const token = localStorage.getItem("token");
 
-  const [video, setVideo] = useState(null);
+  const [video, setVideo] = useState([]);
 
   //get all videos
   const getAllVideos = async () => {

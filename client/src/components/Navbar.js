@@ -24,7 +24,6 @@ export default function Navbar(props) {
   const handleSubmit = (e) => {
     props.forceUpdate();
     e.preventDefault();
-    console.log(search);
     video.map((e) => {
       if (e.title.startsWith(search)) {
         setCurrVideoId(e._id);
@@ -135,6 +134,17 @@ export default function Navbar(props) {
                     Admin
                   </Link>
                   <ul className="dropdown-menu">
+                    <li className="dropdown-item">
+                      <Link
+                        className="nav-link ml-2"
+                        to="/admin"
+                        onClick={() => {
+                          ref1.current.click();
+                        }}
+                      >
+                        NEW_ADMIN_PANEL
+                      </Link>
+                    </li>
                     <li className="dropdown-item">
                       <Link
                         className="nav-link ml-2"

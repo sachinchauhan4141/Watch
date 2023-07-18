@@ -1,17 +1,17 @@
-import React, { useState, useContext } from "react";
-import Main from "./Main";
-import alertContext from "../context/alert/alertContext";
-import Alert from "./Alert";
-import videoContext from "../context/videos/videoContext";
-import currVideoContext from "../context/currVideo/currVideoContext";
+import React, { useContext, useEffect, useState, useRef,useReducer } from "react";
+import videoContext from "../../context/videos/videoContext";
+import alertContext from "../../context/alert/alertContext";
+import currVideoContext from "../../context/currVideo/currVideoContext";
 
-export default function Home(props) {
-  const context1 = useContext(alertContext);
-  const { showAlert } = context1;
-  const context2 = useContext(videoContext);
-  const { updateVideo, getVideo } = context2;
+const Admin = (props) => {
+  const context = useContext(alertContext);
+  const { showAlert } = context;
+  const context1 = useContext(videoContext);
+  const { video, getAllVideos, updateVideo, getVideo, deleteVideo } = context1;
   const context3 = useContext(currVideoContext);
-  const { currVideoId } = context3;
+  const { currVideoId, setCurrVideoId } = context3;
+  const ref1 = useRef(null);
+  const [update, forceUpdate] = useReducer((x) => x + 1, 0);
   const [updatedVideo, setUpdatedVideo] = useState({
     id: "",
     genre: "",
@@ -24,6 +24,11 @@ export default function Home(props) {
     const currVideo = await getVideo(_id);
     setUpdatedVideo(currVideo);
   };
+
+  useEffect(() => {
+    getAllVideos();
+    // eslint-disable-next-line
+  }, [update]);
 
   //handle click for update button
   const handleClick = async (e) => {
@@ -38,9 +43,16 @@ export default function Home(props) {
   const handleChange = (e) => {
     setUpdatedVideo({ ...updatedVideo, [e.target.name]: e.target.value });
   };
-
   return (
-    <main>
+    <div className="container">
+      {/* <!-- Button trigger for update modal --> */}
+      <button
+        type="button"
+        className="btn btn-primary d-none"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        ref={ref1}
+      />
       {/* <!-- Modal for update --> */}
       <div
         className="modal fade"
@@ -51,7 +63,6 @@ export default function Home(props) {
       >
         <div className="modal-dialog">
           <div className="modal-content">
-            <Alert alert={props.alert} />
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="exampleModalLabel">
                 Update : {updatedVideo.title}
@@ -151,14 +162,17 @@ export default function Home(props) {
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
-                // onClick={handleToggle}
               >
                 Close
               </button>
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={handleClick}
+                onClick={() => {
+                  forceUpdate();
+                  handleClick();
+                  ref1.current.click();
+                }}
               >
                 Update
               </button>
@@ -166,69 +180,59 @@ export default function Home(props) {
           </div>
         </div>
       </div>
-      {/* carousel */}
-      <div id="carouselExample" className="carousel slide my-2 mx-3">
-        <div
-          className="carousel-inner"
-          style={{
-            borderRadius: "1rem",
-          }}
-        >
-          {/* <h1>Welcome , {props.user.name}</h1> */}
-          <div className="carousel-item active">
-            <img
-              style={{ height: "35rem" }}
-              src="https://images.hdqwalls.com/wallpapers/minimal-mountains-landscape-4k-az.jpg"
-              className="d-block w-100"
-              alt="..."
-            />
-          </div>
-          <div className="carousel-item">
-            <img
-              style={{ height: "35rem" }}
-              src="https://images.hdqwalls.com/wallpapers/minimal-mountains-landscape-4k-az.jpg"
-              className="d-block w-100"
-              alt="..."
-            />
-          </div>
-          <div className="carousel-item">
-            <img
-              style={{ height: "35rem" }}
-              src="https://images.hdqwalls.com/wallpapers/minimal-mountains-landscape-4k-az.jpg"
-              className="d-block w-100"
-              alt="..."
-            />
-          </div>
-        </div>
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExample"
-          data-bs-slide="prev"
-        >
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExample"
-          data-bs-slide="next"
-        >
-          <span
-            className="carousel-control-next-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Next</span>
-        </button>
-      </div>
-      {/* main container */}
-      <div className="my-3" id="main">
-        <Main setUpdated={setUpdated} setLoading={props.setLoading} />
-      </div>
-    </main>
+      {/* -------------------------------------------------- */}
+      <h3>Welcome Admin...</h3>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">#Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Url</th>
+            <th scope="col">Src</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {video.map((curr) => {
+            return (
+              <tr key={curr.id}>
+                <th scope="row">{curr.id}</th>
+                <td>{curr.title}</td>
+                <td>{curr.genre}</td>
+                <td>{curr.url}</td>
+                <td>{curr.src}</td>
+                <td>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => {
+                      ref1.current.click();
+                      setCurrVideoId(curr._id);
+                      setUpdated(curr._id);
+                    }}
+                  >
+                    Update
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => {
+                      deleteVideo(curr._id);
+                      showAlert("warning", "Note deleted successfully...");
+                    }}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
-}
+};
+
+export default Admin;

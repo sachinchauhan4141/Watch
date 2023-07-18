@@ -12,6 +12,7 @@ import VideoAdmin from "./components/Admin/VideoAdmin";
 import UserContext from "./context/user/userContext";
 import alertContext from "./context/alert/alertContext";
 import User from "./components/User";
+import Admin from "./components/Admin_New/Admin";
 
 function App() {
   const context1 = useContext(alertContext);
@@ -154,6 +155,15 @@ function App() {
             <>
               <Alert alert={alert} />
               <User />
+            </>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <>
+              <Alert alert={alert} />
+              <Admin alert={alert}/>
             </>
           }
         />
