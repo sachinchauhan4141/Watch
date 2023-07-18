@@ -1,7 +1,9 @@
-import React, { useContext, useEffect, useState, useRef,useReducer } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import videoContext from "../../context/videos/videoContext";
 import alertContext from "../../context/alert/alertContext";
 import currVideoContext from "../../context/currVideo/currVideoContext";
+import Alert from "../Alert";
+import { Link } from "react-router-dom";
 
 const Admin = (props) => {
   const context = useContext(alertContext);
@@ -11,7 +13,7 @@ const Admin = (props) => {
   const context3 = useContext(currVideoContext);
   const { currVideoId, setCurrVideoId } = context3;
   const ref1 = useRef(null);
-  const [update, forceUpdate] = useReducer((x) => x + 1, 0);
+  const ref2 = useRef(null);
   const [updatedVideo, setUpdatedVideo] = useState({
     id: "",
     genre: "",
@@ -28,7 +30,7 @@ const Admin = (props) => {
   useEffect(() => {
     getAllVideos();
     // eslint-disable-next-line
-  }, [update]);
+  }, []);
 
   //handle click for update button
   const handleClick = async (e) => {
@@ -44,6 +46,7 @@ const Admin = (props) => {
     setUpdatedVideo({ ...updatedVideo, [e.target.name]: e.target.value });
   };
   return (
+    (localStorage.getItem("token") && props.user.isAdmin) ? 
     <div className="container">
       {/* <!-- Button trigger for update modal --> */}
       <button
@@ -63,6 +66,7 @@ const Admin = (props) => {
       >
         <div className="modal-dialog">
           <div className="modal-content">
+            <Alert alert={props.alert} />
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="exampleModalLabel">
                 Update : {updatedVideo.title}
@@ -169,9 +173,11 @@ const Admin = (props) => {
                 type="button"
                 className="btn btn-primary"
                 onClick={() => {
-                  forceUpdate();
+                  props.forceUpdate();
                   handleClick();
-                  ref1.current.click();
+                  setTimeout(() => {
+                    ref1.current.click();
+                  }, 1000);
                 }}
               >
                 Update
@@ -180,8 +186,80 @@ const Admin = (props) => {
           </div>
         </div>
       </div>
+      {/* <!-- Button trigger for delete modal --> */}
+      <button
+        type="button"
+        className="btn btn-primary d-none"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal2"
+        ref={ref2}
+      />
+      {/* modal for delete */}
+      <div
+        className="modal fade"
+        id="exampleModal2"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel2"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <Alert alert={props.alert} />
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel2">
+                Deleting : {updatedVideo.title}
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() => {
+                  props.forceUpdate();
+                  showAlert("warning", "Note deleted successfully...");
+                  deleteVideo(updatedVideo._id);
+                  setTimeout(() => {
+                    ref2.current.click();
+                  }, 1000);
+                }}
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       {/* -------------------------------------------------- */}
-      <h3>Welcome Admin...</h3>
+      <div className="py-3 d-flex">
+        <h1>Welcome Admin...</h1>
+        <div style={{marginLeft:"45rem"}}>
+          <Link
+            className="btn btn-primary mx-2"
+            to="/addvideo"
+          >
+            Add Video
+          </Link>
+          <Link
+            className="btn btn-primary"
+            to="/addgenre"
+          >
+            Add Genre
+          </Link>
+        </div>
+      </div>
       <table className="table">
         <thead>
           <tr>
@@ -219,8 +297,8 @@ const Admin = (props) => {
                   <button
                     className="btn btn-danger"
                     onClick={() => {
-                      deleteVideo(curr._id);
-                      showAlert("warning", "Note deleted successfully...");
+                      ref2.current.click();
+                      setUpdated(curr._id);
                     }}
                   >
                     Delete
@@ -231,6 +309,8 @@ const Admin = (props) => {
           })}
         </tbody>
       </table>
+    </div>:<div className="container">
+      <h1>Not Allowed!</h1>
     </div>
   );
 };

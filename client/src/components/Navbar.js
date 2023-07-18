@@ -123,51 +123,17 @@ export default function Navbar(props) {
                 </ul>
               </li>
               {localStorage.getItem("token") && props.user.isAdmin && (
-                <li className="nav-item dropdown">
+                <li>
                   <Link
-                    className="nav-link dropdown-toggle"
-                    to="/"
+                    className="nav-link"
+                    to="/admin"
                     role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
+                    onClick={() => {
+                      ref1.current.click();
+                    }}
                   >
                     Admin
                   </Link>
-                  <ul className="dropdown-menu">
-                    <li className="dropdown-item">
-                      <Link
-                        className="nav-link ml-2"
-                        to="/admin"
-                        onClick={() => {
-                          ref1.current.click();
-                        }}
-                      >
-                        NEW_ADMIN_PANEL
-                      </Link>
-                    </li>
-                    <li className="dropdown-item">
-                      <Link
-                        className="nav-link ml-2"
-                        to="/addvideo"
-                        onClick={() => {
-                          ref1.current.click();
-                        }}
-                      >
-                        Add Video
-                      </Link>
-                    </li>
-                    <li className="dropdown-item">
-                      <Link
-                        className="nav-link"
-                        to="/addgenre"
-                        onClick={() => {
-                          ref1.current.click();
-                        }}
-                      >
-                        Add Genre
-                      </Link>
-                    </li>
-                  </ul>
                 </li>
               )}
               <li className="nav-item dropdown">
