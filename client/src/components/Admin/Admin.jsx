@@ -173,7 +173,6 @@ const Admin = (props) => {
                 type="button"
                 className="btn btn-primary"
                 onClick={() => {
-                  props.forceUpdate();
                   handleClick();
                   setTimeout(() => {
                     ref1.current.click();
