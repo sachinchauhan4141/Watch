@@ -228,7 +228,6 @@ const Admin = (props) => {
                 type="button"
                 className="btn btn-danger"
                 onClick={() => {
-                  props.forceUpdate();
                   showAlert("warning", "Note deleted successfully...");
                   deleteVideo(updatedVideo._id);
                   setTimeout(() => {
