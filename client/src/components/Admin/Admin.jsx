@@ -45,8 +45,7 @@ const Admin = (props) => {
   const handleChange = (e) => {
     setUpdatedVideo({ ...updatedVideo, [e.target.name]: e.target.value });
   };
-  return (
-    (localStorage.getItem("token") && props.user.isAdmin) ? 
+  return localStorage.getItem("token") && props.user.isAdmin ? (
     <div className="container">
       {/* <!-- Button trigger for update modal --> */}
       <button
@@ -243,17 +242,11 @@ const Admin = (props) => {
       {/* -------------------------------------------------- */}
       <div className="py-3 d-flex">
         <h1>Welcome Admin...</h1>
-        <div style={{marginLeft:"45rem"}}>
-          <Link
-            className="btn btn-primary mx-2"
-            to="/addvideo"
-          >
+        <div style={{ marginLeft: "45rem" }}>
+          <Link className="btn btn-primary mx-2" to="/addvideo">
             Add Video
           </Link>
-          <Link
-            className="btn btn-primary"
-            to="/addgenre"
-          >
+          <Link className="btn btn-primary" to="/addgenre">
             Add Genre
           </Link>
         </div>
@@ -307,8 +300,16 @@ const Admin = (props) => {
           })}
         </tbody>
       </table>
-    </div>:<div className="container">
-      <h1>Not Allowed!</h1>
+    </div>
+  ) : (
+    <div
+      style={{
+        height: "12rem",
+        textAlign: "center",
+        paddingTop: "15rem",
+      }}
+    >
+      <h1>Not Allowed.....</h1>
     </div>
   );
 };
