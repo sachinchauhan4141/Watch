@@ -2,15 +2,12 @@ import React, { useContext, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import videoContext from "../context/videos/videoContext";
 import alertContext from "../context/alert/alertContext";
-import currVideoContext from "../context/currVideo/currVideoContext";
 
 export default function Navbar(props) {
   const context = useContext(alertContext);
   const { showAlert } = context;
   const context1 = useContext(videoContext);
-  const { video } = context1;
-  const context4 = useContext(currVideoContext);
-  const { setCurrVideoId } = context4;
+  const { videos } = context1;
   const ref1 = useRef(null);
 
   const navigate = useNavigate();
@@ -24,12 +21,10 @@ export default function Navbar(props) {
   const handleSubmit = (e) => {
     props.forceUpdate();
     e.preventDefault();
-    video.map((e) => {
+    videos.map((e) => {
       if (e.title.startsWith(search)) {
-        setCurrVideoId(e._id);
         localStorage.setItem("curr-genre", e.genre);
-        localStorage.setItem("curr-video", e._id);
-        navigate("/video");
+        navigate("/video/"+e._id);
         return "found";
       }
       showAlert("danger", "Video not found...");
