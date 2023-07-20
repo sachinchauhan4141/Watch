@@ -1,19 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import videoContext from "../context/videos/videoContext";
-import currVideoContext from "../context/currVideo/currVideoContext";
 
 function Video(props) {
+  const {id:videoId} = useParams();
   const context1 = useContext(videoContext);
-  const { video, getAllVideos, getVideo } = context1;
-  const context2 = useContext(currVideoContext);
-  const { currVideoId, setCurrVideoId } = context2;
-  // eslint-disable-next-line
+  const { videos, getAllVideos, getVideo } = context1;
   const [currVideo, setCurrVideo] = useState(null);
 
   const getCurrVideo = async () => {
     const currVideo = await getVideo(
-      currVideoId ? currVideoId : localStorage.getItem("curr-video")
+      videoId
     );
     setTimeout(() => {
       window.scrollTo(0, 0);
@@ -32,11 +29,6 @@ function Video(props) {
       <div className="container-fluid">
         <div
           className="container-fluid my-2 px-3 py-1"
-          // style={{
-          //   backgroundColor: "rgb(33, 37, 41)",
-          //   color: "white",
-          //   borderRadius: "1rem",
-          // }}
         >
           <h2 className="">{currVideo && currVideo.title}</h2>
         </div>
@@ -53,16 +45,11 @@ function Video(props) {
       <div className="container-fluid my-3">
         <div
           className="container-fluid my-2 px-3 py-1 border border-secondary border-5 roundedborder border-secondary border-5 rounded"
-          // style={{
-          //   backgroundColor: "rgb(33, 37, 41)",
-          //   color: "white",
-          //   borderRadius: "1rem",
-          // }}
         >
           <h3>Similar Content You Will Like....</h3>
           <div className="row" id="category">
-            {video &&
-              video.map((element) => {
+            {videos &&
+              videos.map((element) => {
                 if (
                   element.genre === Number(localStorage.getItem("curr-genre"))
                 ) {
@@ -71,11 +58,8 @@ function Video(props) {
                       <Link
                         onClick={() => {
                           props.forceUpdate();
-                          setCurrVideoId(element._id);
-                          getCurrVideo(currVideoId);
-                          localStorage.setItem("curr-video", element._id);
                         }}
-                        to="/video"
+                        to={`/video/${element._id}`}
                       >
                         <div className="card" style={{ width: "10rem" }}>
                           <img

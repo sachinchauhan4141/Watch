@@ -6,7 +6,7 @@ const VideoState = (props) => {
   const host = "https://watch-now-tv-da2q.onrender.com";
   const token = localStorage.getItem("token");
 
-  const [video, setVideo] = useState([]);
+  const [videos, setVideos] = useState([]);
 
   //get all videos
   const getAllVideos = async () => {
@@ -18,7 +18,7 @@ const VideoState = (props) => {
       },
     });
     const video = await response.json();
-    setVideo(video);
+    setVideos(video);
   };
 
   //get current video
@@ -76,7 +76,7 @@ const VideoState = (props) => {
   return (
     <videoContext.Provider
       value={{
-        video,
+        videos,
         addVideo,
         deleteVideo,
         updateVideo,

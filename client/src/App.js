@@ -64,7 +64,7 @@ function App() {
           }
         />
         <Route
-          path="/Video"
+          path="/Video/:id"
           element={
             <>
               {localStorage.getItem("token") ? (

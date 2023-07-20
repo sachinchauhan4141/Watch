@@ -5,7 +5,7 @@ import currVideoContext from "../context/currVideo/currVideoContext";
 
 export default function Card(props) {
   const context3 = useContext(videoContext);
-  const { video, getAllVideos} = context3;
+  const { videos, getAllVideos} = context3;
   const context4 = useContext(currVideoContext);
   const { setCurrVideoId } = context4;
 
@@ -16,8 +16,8 @@ export default function Card(props) {
 
   return (
     <>
-      {video &&
-        video.map((element) => {
+      {videos &&
+        videos.map((element) => {
           if (element.genre === props.genreid) {
             return (
               <div className="col container p-3" key={element.id}>
@@ -34,7 +34,7 @@ export default function Card(props) {
                       localStorage.setItem("curr-genre", props.genreid);
                       window.scrollTo(0, 0);
                     }}
-                    to="/video"
+                    to={`/video/${element._id}`}
                   >
                     <img
                       src={`https://www.themoviedb.org/t/p/w220_and_h330_face${element.src}`}
