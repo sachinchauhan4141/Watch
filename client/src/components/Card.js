@@ -30,7 +30,6 @@ export default function Card(props) {
                     style={{ cursor: "default" }}
                     onClick={() => {
                       setCurrVideoId(element._id);
-                      localStorage.setItem("curr-video", element._id);
                       localStorage.setItem("curr-genre", props.genreid);
                       window.scrollTo(0, 0);
                     }}

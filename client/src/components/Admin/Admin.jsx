@@ -9,7 +9,7 @@ const Admin = (props) => {
   const context = useContext(alertContext);
   const { showAlert } = context;
   const context1 = useContext(videoContext);
-  const { video, getAllVideos, updateVideo, getVideo, deleteVideo } = context1;
+  const { videos, getAllVideos, updateVideo, getVideo, deleteVideo } = context1;
   const context3 = useContext(currVideoContext);
   const { currVideoId, setCurrVideoId } = context3;
   const ref1 = useRef(null);
@@ -264,7 +264,7 @@ const Admin = (props) => {
           </tr>
         </thead>
         <tbody>
-          {video.map((curr) => {
+          {videos.map((curr) => {
             return (
               <tr key={curr.id}>
                 <th scope="row">{curr.id}</th>
