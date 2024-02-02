@@ -270,8 +270,8 @@ const Admin = (props) => {
                 <th scope="row">{curr.id}</th>
                 <td>{curr.title}</td>
                 <td>{curr.genre}</td>
-                <td>{curr.url}</td>
-                <td>{curr.src}</td>
+                <td style={{maxWidth:"25rem",overflowX:"scroll"}}>{curr.url}</td>
+                <td style={{maxWidth:"25rem",overflowX:"scroll"}}>{curr.src}</td>
                 <td>
                   <button
                     className="btn btn-primary"

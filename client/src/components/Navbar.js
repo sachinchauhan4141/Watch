@@ -64,59 +64,6 @@ export default function Navbar(props) {
                   Home
                 </Link>
               </li>
-              <li className="nav-item dropdown">
-                <Link
-                  className="nav-link dropdown-toggle"
-                  to="/"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Platforms
-                </Link>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link className="dropdown-item" to="/Category">
-                      Netflix
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/Category">
-                      Hotstar
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/Category">
-                      Disney+
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/Category">
-                      Prime Video
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/Category">
-                      Xstreme
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/Category">
-                      Jio Cinema
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/Category">
-                      Sony Liv
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/Category">
-                      Other
-                    </Link>
-                  </li>
-                </ul>
-              </li>
               {localStorage.getItem("token") && props.user.isAdmin && (
                 <li>
                   <Link
