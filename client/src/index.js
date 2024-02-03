@@ -9,7 +9,6 @@ import CurrVideoState from "./context/currVideo/currVideoState";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
     <CurrVideoState>
       <UserState>
         <AlertState>
@@ -21,5 +20,4 @@ root.render(
         </AlertState>
       </UserState>
     </CurrVideoState>
-  </React.StrictMode>
 );
