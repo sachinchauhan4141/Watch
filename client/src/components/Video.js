@@ -27,18 +27,18 @@ function Video(props) {
   return (
     <main>
       <div className="container-fluid">
-        <div
-          className="container-fluid my-2 px-3 py-1"
-        >
-          <h2 className="">{currVideo && currVideo.title}</h2>
-        </div>
         <iframe
-          style={{ borderRadius: "1rem",width:"100%",maxHeight: "50rem",minHeight:"35rem" }}
+          style={{ borderRadius: "1rem",width:"100%",height:"30rem"}}
           src={currVideo && currVideo.url}
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
         />
+        <div
+          className="container-fluid my-2 px-3 py-1"
+        >
+          <h2 className="">{currVideo && currVideo.title}</h2>
+        </div>
       </div>
       <div className="container-fluid my-3">
         <div
