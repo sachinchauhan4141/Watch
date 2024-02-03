@@ -30,24 +30,24 @@ export default function Home(props) {
         >
           <div className="carousel-item active">
             <img
-              style={{ height: "35rem" }}
-              src="https://images.hdqwalls.com/wallpapers/minimal-mountains-landscape-4k-az.jpg"
+              style={{ maxHeight: "35rem",minHeight:"10rem" }}
+              src="https://e0.pxfuel.com/wallpapers/518/420/desktop-wallpaper-2019-movie-poster-john-wick-3-dual-wide-widescreen-16-9-widescreen-2560x1440-movie.jpg"
               className="d-block w-100"
               alt="..."
             />
           </div>
           <div className="carousel-item">
             <img
-              style={{ height: "35rem" }}
-              src="https://images.hdqwalls.com/wallpapers/minimal-mountains-landscape-4k-az.jpg"
+              style={{  maxHeight: "35rem",minHeight:"10rem" }}
+              src="https://c4.wallpaperflare.com/wallpaper/579/921/292/amazing-spider-man-new-marvel-s-the-amazing-spider-man-movie-poster-wallpaper-preview.jpg"
               className="d-block w-100"
               alt="..."
             />
           </div>
           <div className="carousel-item">
             <img
-              style={{ height: "35rem" }}
-              src="https://images.hdqwalls.com/wallpapers/minimal-mountains-landscape-4k-az.jpg"
+              style={{ maxHeight: "35rem",minHeight:"10rem" }}
+              src="https://c4.wallpaperflare.com/wallpaper/1017/842/358/tv-banshee-breaking-bad-vikings-wallpaper-preview.jpg"
               className="d-block w-100"
               alt="..."
             />
