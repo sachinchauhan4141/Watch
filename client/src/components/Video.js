@@ -33,7 +33,7 @@ function Video(props) {
           <h2 className="">{currVideo && currVideo.title}</h2>
         </div>
         <iframe
-          style={{ borderRadius: "1rem",width:"100%",maxHeight: "35rem",minHeight:"10rem" }}
+          style={{ borderRadius: "1rem",width:"100%",maxHeight: "50rem",minHeight:"35rem" }}
           src={currVideo && currVideo.url}
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
