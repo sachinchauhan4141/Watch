@@ -13,6 +13,7 @@ import UserContext from "./context/user/userContext";
 import alertContext from "./context/alert/alertContext";
 import User from "./components/User";
 import Admin from "./components/Admin/Admin";
+import Warning from "./components/Warning";
 
 function App() {
   const context1 = useContext(alertContext);
@@ -24,9 +25,10 @@ function App() {
   const setLoading = (progress) => {
     setProgress(progress);
   };
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (token) {
       getUser();
     }
     // eslint-disable-next-line
@@ -44,45 +46,21 @@ function App() {
         <Route
           path="/"
           element={
-            <>
-              {localStorage.getItem("token") ? (
-                <Home user={user} alert={alert} setLoading={setLoading} />
-              ) : (
-                <>
-                  <div
-                    style={{
-                      height: "12rem",
-                      textAlign: "center",
-                      paddingTop: "15rem",
-                    }}
-                  >
-                    <h1>Login or Register to continue...</h1>
-                  </div>
-                </>
-              )}
-            </>
+            token ? (
+              <Home user={user} alert={alert} setLoading={setLoading} />
+            ) : (
+              <Warning />
+            )
           }
         />
         <Route
           path="/Video/:id"
           element={
-            <>
-              {localStorage.getItem("token") ? (
-                <Video update={update} forceUpdate={forceUpdate} />
-              ) : (
-                <>
-                  <div
-                    style={{
-                      height: "12rem",
-                      textAlign: "center",
-                      paddingTop: "15rem",
-                    }}
-                  >
-                    <h1>Login or Register to continue...</h1>
-                  </div>
-                </>
-              )}
-            </>
+            token ? (
+              <Video update={update} forceUpdate={forceUpdate} />
+            ) : (
+              <Warning />
+            )
           }
         />
         <Route
@@ -108,21 +86,7 @@ function App() {
           element={
             <>
               <Alert alert={alert} />
-              {user.isAdmin ? (
-                <GenreAdmin />
-              ) : (
-                <>
-                  <div
-                    style={{
-                      height: "12rem",
-                      textAlign: "center",
-                      paddingTop: "15rem",
-                    }}
-                  >
-                    <h1>Not Allowed.....</h1>
-                  </div>
-                </>
-              )}
+              {user.isAdmin ? <GenreAdmin /> : <Warning />}
             </>
           }
         />
@@ -131,21 +95,7 @@ function App() {
           element={
             <>
               <Alert alert={alert} />
-              {user.isAdmin ? (
-                <VideoAdmin />
-              ) : (
-                <>
-                  <div
-                    style={{
-                      height: "12rem",
-                      textAlign: "center",
-                      paddingTop: "15rem",
-                    }}
-                  >
-                    <h1>Not Allowed.....</h1>
-                  </div>
-                </>
-              )}
+              {user.isAdmin ? <VideoAdmin /> : <Warning />}
             </>
           }
         />
