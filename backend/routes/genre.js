@@ -5,7 +5,7 @@ const Genre = require("../models/Genre");
 const { body, validationResult } = require("express-validator");
 
 //ROUTE 1 : get all genre using: GET "/api/genre/fetchallgenres". requires login
-router.get("/fetchallgenres", fetchuser, async (req, res) => {
+router.get("/fetchallgenres", async (req, res) => {
   try {
     const genre = await Genre.find();
     res.json(genre);

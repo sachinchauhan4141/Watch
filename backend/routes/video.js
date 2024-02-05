@@ -5,7 +5,7 @@ const Video = require("../models/Video");
 const { body, validationResult } = require("express-validator");
 
 //ROUTE 1 : get all videos using: GET "/api/video/fetchallvideos". requires login
-router.get("/fetchallvideos", fetchuser, async (req, res) => {
+router.get("/fetchallvideos", async (req, res) => {
   try {
     const video = await Video.find();
     res.json(video);

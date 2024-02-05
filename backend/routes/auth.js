@@ -28,7 +28,7 @@ router.post(
       //check weather user already exists or not
       let user = await User.findOne({ email: req.body.email });
       if (user) {
-        return res.status(400).json({success, error: "user already exists" });
+        return res.status(400).json({ success, error: "user already exists" });
       }
       //creating a new user
       const salt = await bcrypt.genSalt(10);
@@ -45,7 +45,7 @@ router.post(
       };
       const authtoken = jwt.sign(data, JWT_SECRET);
       success = true;
-      res.json({success, authtoken });
+      res.json({ success, authtoken });
     } catch (error) {
       console.log(error.message);
       res.status(500).send("internal server error!");
@@ -73,12 +73,16 @@ router.post(
       let success = false;
       let user = await User.findOne({ email });
       if (!user) {
-        return res.status(400).json({success, error: "incorrect credentials!" });
+        return res
+          .status(400)
+          .json({ success, error: "incorrect credentials!" });
       }
 
       const passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
-        return res.status(400).json({success, error: "incorrect credentials!" });
+        return res
+          .status(400)
+          .json({ success, error: "incorrect credentials!" });
       }
 
       const data = {
@@ -88,7 +92,7 @@ router.post(
       };
       const authtoken = jwt.sign(data, JWT_SECRET);
       success = true;
-      res.json({success, authtoken });
+      res.json({ success, authtoken });
     } catch (error) {
       console.log(error.message);
       res.status(500).send("internal server error!");
@@ -111,7 +115,18 @@ router.post("/getuser", fetchuser, async (req, res) => {
 //ROUTE 4 : updateuser using: PUT "/api/auth/updateuser". require login
 router.put("/updateuser", fetchuser, async (req, res) => {
   try {
-    const { name, email } = req.body;
+    const { name, email, password, oldpassword } = req.body;
+
+    let success = false;
+    let oldUser = await User.findOne({email});
+    if (!oldUser) {
+      return res.status(400).json({ success, error: "incorrect credentials!" });
+    }
+
+    const passwordCompare = await bcrypt.compare(oldpassword, oldUser.password);
+    if (!passwordCompare) {
+      return res.status(400).json({ success, error: "incorrect credentials!" });
+    }
 
     //creating new note
     const newCreds = {};
@@ -121,7 +136,11 @@ router.put("/updateuser", fetchuser, async (req, res) => {
     if (email) {
       newCreds.email = email;
     }
-
+    if(password){
+      const salt = await bcrypt.genSalt(10);
+      const secPass = await bcrypt.hash(password, salt);
+      newCreds.password = secPass;
+    }
     const userId = req.user.id;
     const user = await User.findByIdAndUpdate(
       userId,
